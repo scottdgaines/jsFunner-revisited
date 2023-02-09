@@ -46,4 +46,4 @@ const cities = {
   }
 }
 
-module.exports = { cities } 
+module.exports = { cities }
