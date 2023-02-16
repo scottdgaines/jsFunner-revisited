@@ -1,16 +1,17 @@
 const { slackChannels } = require('../prototypes/datasets/slackChannels');
+var expect = require('chai').expect
 
 const slackChannelPrompts = require("../prototypes/slackChannels-code");
 
 describe("Slack Channel Prompts", () => {
-  it.skip("should return the total number of pinned posts across the Slack community", () => {
+  it("should return the total number of pinned posts across the Slack community", () => {
     const e = slackChannelPrompts.findTotalNumberPins();
     const result = 70;
 
     expect(e).to.deep.equal(result);
   });
 
-  it.skip("should return the channel with the oldest post", () => {
+  it("should return the channel with the oldest post", () => {
     const e = slackChannelPrompts.findLeastActiveChannel();
 
     const result = {
@@ -24,7 +25,7 @@ describe("Slack Channel Prompts", () => {
     expect(e).to.deep.equal(result);
   });
 
-  it.skip("should return a list of privacy levels with the channels that have that privacy setting", () => {
+  it("should return a list of privacy levels with the channels that have that privacy setting", () => {
     const e = slackChannelPrompts.organizeByPrivacyLevel();
 
     const result = {
@@ -41,7 +42,7 @@ describe("Slack Channel Prompts", () => {
     expect(e).to.deep.equal(result);
   });
 
-  it.skip("should return the name of the largest Slack channel", () => {
+  it("should return the name of the largest Slack channel", () => {
     const e = slackChannelPrompts.findLargestChannel();
     const result = "health-wellness";
 
