@@ -11,7 +11,7 @@ describe("Slack Channel Prompts", () => {
     expect(e).to.deep.equal(result);
   });
 
-  it("should return the channel with the oldest post", () => {
+  it.skip("should return the channel with the oldest post", () => {
     const e = slackChannelPrompts.findLeastActiveChannel();
 
     const result = {

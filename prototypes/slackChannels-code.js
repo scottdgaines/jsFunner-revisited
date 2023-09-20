@@ -4,9 +4,10 @@ const slackChannelPrompts = {
   // Return the total number of pinned posts across the Slack community
   // Return -> 70
   findTotalNumberPins() {
-    return slackChannels.reduce((acc, chan) => {
-      return acc = chan.numPins + acc
+    const pinnedPosts = slackChannels.reduce((acc, chan) => {
+      return acc + chan.numPins
     }, 0)
+    return pinnedPosts
   },
 
   // Return the channel with the oldest post. 
@@ -18,21 +19,31 @@ const slackChannelPrompts = {
   //   latestPost: '05/06/21'
   // }
   // Hint: Think about how you will need to format the dates for this! 
+  
   findLeastActiveChannel() {
-    let oldestDate = 31
+   
+    return slackChannels.forEach(channel => {
+      const date1 = new Date(channel.latestPost)
 
-    slackChannels.forEach(chan => {
-      const date = chan.latestPost.split('').slice(3, 5).join('')
-      
-      if (date < oldestDate) {
-        oldestDate = date
+      if (date1 < date2) {
+        return elm2.latestPost - elm1.latestPost
       }
-    })
-    
-    return slackChannels.find(chan => {
-      return chan.latestPost.slice(3, 5) === oldestDate
-    })
+    }).pop()
   },
+
+  organizeByPrivacyLevel() {
+
+    return slackChannels.reduce((acc, chan) => {
+      if (chan.isPrivate) {
+        acc.privateChannels.push(chan.title)
+      } else {
+        acc.publicChannels.push(chan.title)
+      }
+      return acc
+    }, {privateChannels: [], publicChannels: []})
+  },
+
+  //sort the array based on the latest post (format latestPost date to make this doable), then return the object at the first index of the array
 
   // Return the slack channels organized by privacy level. 
   // Return -> {
@@ -45,28 +56,16 @@ const slackChannelPrompts = {
   //    '#fitness'
   //  ]
   // }
-  organizeByPrivacyLevel() {
-    return slackChannels.reduce((acc, chan) => {
-      if (chan.isPrivate) {
-        acc.privateChannels.push(chan.title)
-      } else {
-        acc.publicChannels.push(chan.title)
-      }
 
-      return acc
-      
-    }, {privateChannels: [], publicChannels: []})
-  },
+  
+  findLargestChannel() {
+    return slackChannels.sort((chan1, chan2) => {
+      return chan2.memberCount - chan1.memberCount
+    })[0].title.slice(1)
+
+  }
 
   // Return the name of the largest Slack channel. Remember to parse out the octothorpe!
   // Return -> 'health-wellness'
-  findLargestChannel() {
-    const sortedArr = slackChannels.sort((chan1, chan2) => {
-      return chan2.memberCount - chan1.memberCount
-    })
-
-    return sortedArr[0].title.slice(1)
-  }
-};
-
+}
 module.exports = slackChannelPrompts;

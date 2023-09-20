@@ -1,23 +1,23 @@
 const { trainers, exercisers } = require('../prototypes/datasets/fitnessCenter');
-
+var expect = require('chai').expect
 const fitnessCenterPrompts = require("../prototypes/fitnessCenter-code");
 
 describe('Fitness Center Prompts', () => {
-  it.skip("should return a list of trainers that fit an exerciser's budget", () => {
+  it("should return a list of trainers that fit an exerciser's budget", () => {
     const e = fitnessCenterPrompts.findTrainerInBudget("Ron");
     const result = ["Tammy", "Jean-Ralphio", "Bobby Newport"];
 
     expect(e).to.deep.equal(result);
   });
 
-  it.skip("should return a message if no trainers fit within an exerciser's budget ", () => {
+  it("should return a message if no trainers fit within an exerciser's budget ", () => {
     const e = fitnessCenterPrompts.findTrainerInBudget("Andy");
     const result = "Sorry, no trainers available at this rate!";
 
     expect(e).to.deep.equal(result);
   });
 
-  it.skip("should return the first trainer that specializes in an exerciser's interests", () => {
+  it("should return the first trainer that specializes in an exerciser's interests", () => {
     const e1 = fitnessCenterPrompts.findTrainerForInterest("Mark");
     const e2 = fitnessCenterPrompts.findTrainerForInterest("Jerry");
 
